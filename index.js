@@ -1,14 +1,10 @@
-//Load express module with `require` directive
-var express = require('express')
-var app = express()
+require('make-promises-safe'); // installs an 'unhandledRejection' handler
+const fastify = require('fastify')();
+const healthCheckController = require('./src/controllers/HealthCheckController');
 
-//Define request response in root URL (/)
-app.get('/', function (req, res) {
-  res.send('Hello World!')
-})
+fastify.get('/healthCheck', healthCheckController.simple);
 
-//Launch listening server on port 8081
-app.listen(8081, function () {
-  console.log('app listening on port 8081!')
-})
-
+fastify.listen(3000, '0.0.0.0', (err) => {
+    if (err) throw err;
+    console.log(`server listening on ${fastify.server.address().port}`);
+});
