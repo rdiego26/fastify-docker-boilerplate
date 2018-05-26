@@ -4,10 +4,10 @@ RUN adduser -ms /bin/bash api
 USER api
 
 WORKDIR /app
-COPY package.json /app
+COPY --chown package.json /app
 RUN yarn install
-COPY . /app
-COPY src/ /app/
+COPY --chown . /app
+COPY --chown src/ /app/
 CMD node index.js
 EXPOSE 3000
 
