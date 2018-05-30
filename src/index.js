@@ -1,15 +1,14 @@
 require('make-promises-safe'); // installs an 'unhandledRejection' handler
-const path = require('path');
-const helmet = require('fastify-helmet');
-const app = require('fastify')();
-const triggerHandlers = require(path.resolve('src/handlers'));
+const server = require('./server');
+const log = require('debug')('App');
+const base = require('app-module-path');
+base.addPath(__dirname);
 
-app.register(helmet);
-triggerHandlers.apply(app);
+const app = server();
 
 app.listen(3000, '0.0.0.0', (err) => {
     if (err) throw err;
-    console.log('server listening on 3000');
+    log('server listening on on %o:%o', app.server.address().address, app.server.address().port);
 });
 
 const buildFastify = () => {
