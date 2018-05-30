@@ -9,7 +9,7 @@ app.get('/healthCheck', healthCheckController.simple);
 
 app.listen(3000, '0.0.0.0', (err) => {
     if (err) throw err;
-    console.log(`server listening on ${app.server.address().port}`);
+    console.log('server listening on 3000');
 });
 
 module.exports = app;
