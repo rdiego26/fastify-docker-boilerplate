@@ -1,7 +1,7 @@
 require('make-promises-safe'); // installs an 'unhandledRejection' handler
 const helmet = require('fastify-helmet');
 const fastify = require('fastify')();
-const healthCheckController = require('./src/controllers/HealthCheckController');
+const healthCheckController = require('./controllers/HealthCheckController');
 
 fastify.register(helmet);
 
