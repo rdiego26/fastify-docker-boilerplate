@@ -1,13 +1,15 @@
 FROM node:latest
 
-RUN adduser -ms /bin/bash api
-USER api
-
+RUN groupadd api-group
+RUN useradd -ms /bin/bash api-user
 WORKDIR /app
-COPY --chown package.json /app
+RUN chown -R api-user:api-group /app
+
+USER api-user
+COPY package.json /app/
 RUN yarn install
-COPY --chown . /app
-COPY --chown src/ /app/
+COPY . /app/
+COPY src/ /app/
 CMD node index.js
 EXPOSE 3000
 
