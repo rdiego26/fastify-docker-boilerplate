@@ -1,11 +1,11 @@
 require('make-promises-safe'); // installs an 'unhandledRejection' handler
+const path = require('path');
 const helmet = require('fastify-helmet');
 const app = require('fastify')();
-const healthCheckController = require('./controllers/HealthCheckController');
+const triggerHandlers = require(path.resolve('src/handlers'));
 
 app.register(helmet);
-
-app.get('/healthCheck', healthCheckController.simple);
+triggerHandlers.apply(app);
 
 app.listen(3000, '0.0.0.0', (err) => {
     if (err) throw err;
