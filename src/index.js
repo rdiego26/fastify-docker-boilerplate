@@ -12,4 +12,8 @@ app.listen(3000, '0.0.0.0', (err) => {
     console.log('server listening on 3000');
 });
 
-module.exports = app;
+const buildFastify = () => {
+	return app;
+};
+
+module.exports = buildFastify;
