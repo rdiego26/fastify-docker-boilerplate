@@ -1,4 +1,4 @@
-# node-docker-boilerplate
+# fastify-docker-boilerplate
 Boilerplate to node with docker.
 
 
