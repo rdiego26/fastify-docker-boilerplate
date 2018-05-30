@@ -1,13 +1,15 @@
 require('make-promises-safe'); // installs an 'unhandledRejection' handler
 const helmet = require('fastify-helmet');
-const fastify = require('fastify')();
+const app = require('fastify')();
 const healthCheckController = require('./controllers/HealthCheckController');
 
-fastify.register(helmet);
+app.register(helmet);
 
-fastify.get('/healthCheck', healthCheckController.simple);
+app.get('/healthCheck', healthCheckController.simple);
 
-fastify.listen(3000, '0.0.0.0', (err) => {
+app.listen(3000, '0.0.0.0', (err) => {
     if (err) throw err;
-    console.log(`server listening on ${fastify.server.address().port}`);
+    console.log(`server listening on ${app.server.address().port}`);
 });
+
+module.exports = app;
